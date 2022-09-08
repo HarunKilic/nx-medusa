@@ -1,6 +1,6 @@
 /* eslint-disable */
 export default {
-  displayName: 'medusa',
+  displayName: 'nx-medusa-e2e',
   preset: '../../jest.preset.js',
   globals: {
     'ts-jest': {
@@ -11,5 +11,5 @@ export default {
     '^.+\\.[tj]s$': 'ts-jest',
   },
   moduleFileExtensions: ['ts', 'js', 'html'],
-  coverageDirectory: '../../coverage/packages/medusa',
+  coverageDirectory: '../../coverage/e2e/nx-medusa-e2e',
 };

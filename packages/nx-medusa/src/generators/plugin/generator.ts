@@ -8,9 +8,9 @@ import {
   Tree,
 } from '@nrwl/devkit';
 import * as path from 'path';
-import { MedusaGeneratorSchema } from './schema';
+import { PluginGeneratorSchema } from './schema';
 
-interface NormalizedSchema extends MedusaGeneratorSchema {
+interface NormalizedSchema extends PluginGeneratorSchema {
   projectName: string;
   projectRoot: string;
   projectDirectory: string;
@@ -19,12 +19,13 @@ interface NormalizedSchema extends MedusaGeneratorSchema {
 
 function normalizeOptions(
   tree: Tree,
-  options: MedusaGeneratorSchema
+  options: PluginGeneratorSchema
 ): NormalizedSchema {
   const name = names(options.name).fileName;
   const projectDirectory = options.directory
     ? `${names(options.directory).fileName}/${name}`
     : name;
+
   const projectName = projectDirectory.replace(new RegExp('/', 'g'), '-');
   const projectRoot = `${getWorkspaceLayout(tree).libsDir}/${projectDirectory}`;
   const parsedTags = options.tags
@@ -33,6 +34,7 @@ function normalizeOptions(
 
   return {
     ...options,
+    name,
     projectName,
     projectRoot,
     projectDirectory,
@@ -55,15 +57,16 @@ function addFiles(tree: Tree, options: NormalizedSchema) {
   );
 }
 
-export default async function (tree: Tree, options: MedusaGeneratorSchema) {
+export default async function (tree: Tree, options: PluginGeneratorSchema) {
   const normalizedOptions = normalizeOptions(tree, options);
+
   addProjectConfiguration(tree, normalizedOptions.projectName, {
     root: normalizedOptions.projectRoot,
     projectType: 'library',
     sourceRoot: `${normalizedOptions.projectRoot}/src`,
     targets: {
       build: {
-        executor: '@novusweb/medusa:build',
+        executor: 'nx-medusa:build',
       },
     },
     tags: normalizedOptions.parsedTags,

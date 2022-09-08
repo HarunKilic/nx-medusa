@@ -15,7 +15,7 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@novusweb/medusa": ["packages/medusa/src/index.ts"]
+      "nx-medusa": ["packages/nx-medusa/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

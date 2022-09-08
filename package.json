@@ -1,11 +1,16 @@
 {
-  "name": "novusweb",
+  "name": "nx-medusas",
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
     "start": "nx serve",
-    "build": "nx build",
-    "test": "nx test"
+    "build": "nx build nx-medusa",
+    "test": "nx test",
+    "link": "npm link ./dist/packages/nx-medusa",
+    "publish": "cd dist/packages/nx-medusa && npm publish",
+    "publish:alpha": "cd dist/packages/nx-medusa && npm publish --tag alpha",
+    "publish:beta": "cd dist/packages/nx-medusa && npm publish --tag beta",
+    "release": "cd packages/nx-medusa && npm run release"
   },
   "private": true,
   "devDependencies": {
@@ -17,6 +22,7 @@
     "@nrwl/linter": "14.6.5",
     "@nrwl/nx-plugin": "^14.6.5",
     "@nrwl/workspace": "14.6.5",
+    "@nrwl/node": "14.6.5",
     "@swc-node/register": "^1.4.2",
     "@swc/cli": "~0.1.55",
     "@swc/core": "^1.2.173",

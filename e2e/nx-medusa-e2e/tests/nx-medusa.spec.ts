@@ -6,7 +6,7 @@ import {
   uniq,
 } from '@nrwl/nx-plugin/testing';
 
-describe('medusa e2e', () => {
+describe('nx-medusa e2e', () => {
   // Setting up individual workspaces per
   // test can cause e2e runs to take a long time.
   // For this reason, we recommend each suite only
@@ -14,7 +14,7 @@ describe('medusa e2e', () => {
   // on a unique project in the workspace, such that they
   // are not dependant on one another.
   beforeAll(() => {
-    ensureNxProject('@novusweb/medusa', 'dist/packages/medusa');
+    ensureNxProject('@novusweb/nx-medusa', 'dist/packages/nx-medusa');
   });
 
   afterAll(() => {
@@ -23,18 +23,20 @@ describe('medusa e2e', () => {
     runNxCommandAsync('reset');
   });
 
-  it('should create medusa', async () => {
-    const project = uniq('medusa');
-    await runNxCommandAsync(`generate @novusweb/medusa:medusa ${project}`);
+  it('should create nx-medusa', async () => {
+    const project = uniq('nx-medusa');
+    await runNxCommandAsync(
+      `generate @novusweb/nx-medusa:nx-medusa ${project}`
+    );
     const result = await runNxCommandAsync(`build ${project}`);
     expect(result.stdout).toContain('Executor ran');
   }, 120000);
 
   describe('--directory', () => {
     it('should create src in the specified directory', async () => {
-      const project = uniq('medusa');
+      const project = uniq('nx-medusa');
       await runNxCommandAsync(
-        `generate @novusweb/medusa:medusa ${project} --directory subdir`
+        `generate @novusweb/nx-medusa:nx-medusa ${project} --directory subdir`
       );
       expect(() =>
         checkFilesExist(`libs/subdir/${project}/src/index.ts`)
@@ -44,10 +46,10 @@ describe('medusa e2e', () => {
 
   describe('--tags', () => {
     it('should add tags to the project', async () => {
-      const projectName = uniq('medusa');
-      ensureNxProject('@novusweb/medusa', 'dist/packages/medusa');
+      const projectName = uniq('nx-medusa');
+      ensureNxProject('@novusweb/nx-medusa', 'dist/packages/nx-medusa');
       await runNxCommandAsync(
-        `generate @novusweb/medusa:medusa ${projectName} --tags e2etag,e2ePackage`
+        `generate @novusweb/nx-medusa:nx-medusa ${projectName} --tags e2etag,e2ePackage`
       );
       const project = readJson(`libs/${projectName}/project.json`);
       expect(project.tags).toEqual(['e2etag', 'e2ePackage']);

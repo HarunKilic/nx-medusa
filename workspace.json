@@ -2,7 +2,7 @@
   "$schema": "./node_modules/nx/schemas/workspace-schema.json",
   "version": 2,
   "projects": {
-    "medusa": "packages/medusa",
-    "medusa-e2e": "e2e/medusa-e2e"
+    "nx-medusa": "packages/nx-medusa",
+    "nx-medusa-e2e": "e2e/nx-medusa-e2e"
   }
 }

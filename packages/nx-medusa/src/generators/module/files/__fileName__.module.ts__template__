@@ -1,0 +1,17 @@
+import { Module } from 'medusa-extender';
+import { <%= className %> } from './entities/<%= fileName %>.entity';
+import <%= className %>Repository from './repositories/<%= fileName %>.repository';
+import { <%= className %>Service } from './services/<%= fileName %>.service';
+import { <%= className %>Router } from './routers/<%= fileName %>.router';
+import Attach<%= className %>SubscriberMiddleware from './middlewares/<%= fileName %>.middleware';
+
+@Module({
+  imports: [
+    <%= className %>,
+    <%= className %>Repository,
+    <%= className %>Service,
+    <%= className %>Router,
+    Attach<%= className %>SubscriberMiddleware
+  ]
+})
+export class <%= className %>Module { }

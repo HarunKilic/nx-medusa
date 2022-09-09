@@ -1,0 +1,20 @@
+import {
+  MEDUSA_RESOLVER_KEYS,
+  MedusaAuthenticatedRequest,
+  MedusaMiddleware,
+  Utils as MedusaUtils,
+  Middleware,
+} from 'medusa-extender';
+import { NextFunction, Request, Response } from 'express';
+import { Connection } from 'typeorm';
+import <%= projectName %>Subscriber from '../subscribers/<%= fileName %>.subscriber';
+
+@Middleware({requireAtuh: true, routes: [{ method: 'post', path: '/admin/<%= projectName %>s'}] })
+export default class Attach<%= className %>SubscriberMiddleware implements MedusaMiddleware {
+  public consume(req: MedusaAuthenticatedRequest | Request, res: Response, next: NextFunction): void | Promise<void>  {
+    const { connection } = req.scope.resolve(MEDUSA_RESOLVER_KEYS.manager) as { connection: Connection };
+
+    MedusaUtils.attachOrReplaceEntitySubscriber(connection, <%= projectName %>Subscriber);
+    return next();
+  }
+}

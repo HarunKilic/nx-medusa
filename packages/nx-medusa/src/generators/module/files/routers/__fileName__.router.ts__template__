@@ -1,0 +1,14 @@
+import { Router } from 'medusa-extender';
+import routeHandlerController from '../controllers/<%= fileName %>.controller';
+
+@Router({
+  routes: [
+    {
+      requiredAuth: false,
+      path: '/admin/<%= projectName %>/example',
+      method: 'post',
+      handlers: [routeHandlerController],
+    },
+  ],
+})
+export class <%= className %>Router {}

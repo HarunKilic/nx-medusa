@@ -1,0 +1,31 @@
+import {
+  Connection,
+  EntitySubscriberInterface,
+  EventSubscriber,
+  InsertEvent,
+} from 'typeorm';
+import { OnMedusaEntityEvent, Utils, eventEmitter } from 'medusa-extender';
+import { <%= className %> } from '../entities/<%= fileName %>.entity';
+
+@EventSubscriber()
+export default class <%= className %>Subscriber
+  implements EntitySubscriberInterface<<%= className %>>
+{
+  static attachTo(connection: Connection): void {
+    Utils.attachOrReplaceEntitySubscriber(connection, <%= className %>Subscriber);
+  }
+
+  public listenTo(): typeof <%= className %> {
+    return <%= className %>;
+  }
+
+  public async beforeInsert(event: InsertEvent<<%= className %>>): Promise<void> {
+    return await eventEmitter.emitAsync(
+      OnMedusaEntityEvent.Before.InsertEvent(<%= className %>),
+      {
+        event,
+        transactionalEntityManager: event.manager,
+      }
+    );
+  }
+}

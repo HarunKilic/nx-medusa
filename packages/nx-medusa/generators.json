@@ -7,6 +7,11 @@
       "factory": "./src/generators/plugin/generator",
       "schema": "./src/generators/plugin/schema.json",
       "description": "plugin generator"
+    },
+    "module": {
+      "factory": "./src/generators/module/generator",
+      "schema": "./src/generators/module/schema.json",
+      "description": "module generator"
     }
   }
 }

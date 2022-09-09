@@ -27,7 +27,7 @@ function normalizeOptions(
   const projectName = projectDirectory.replace(new RegExp('/', 'g'), '-');
   const projectRoot = `${getWorkspaceLayout(tree).libsDir}/${
     options.pluginName
-  }/${projectDirectory}`;
+  }/src/modules/${projectDirectory}`;
 
   return {
     ...options,

@@ -1,11 +1,23 @@
-# nx-medusa
 
-This library was generated with [Nx](https://nx.dev).
+# nx-medusa-plugin
 
-## Building
+## Install
 
-Run `nx build nx-medusa` to build the library.
+Install with:
 
-## Running unit tests
+```sh
 
-Run `nx test nx-medusa` to execute the unit tests via [Jest](https://jestjs.io).
+yarn -D add nx-medusa
+
+```
+
+## Generate a plugin
+
+Run `nx g nx-medusa:plugin my-plugin` to generate a plugin.
+
+## Generate a module
+
+Run `nx g nx-medusa:module`
+
+1. `name` is the name of the module.
+2. `pluginName` name of the plugin where the module should be in.

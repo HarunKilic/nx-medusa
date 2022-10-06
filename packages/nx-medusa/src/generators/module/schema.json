@@ -17,7 +17,10 @@
     "pluginName": {
       "type": "string",
       "description": "",
-      "x-prompt": "Which plugin should it apply to? Enter plugin folder name"
+      "$default": {
+        "$source": "projectName"
+      },
+      "x-prompt": "Select the plugin where the module should be in."
     }
   },
   "required": [
